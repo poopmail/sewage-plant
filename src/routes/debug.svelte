@@ -8,12 +8,12 @@
 <div class="card">
     <h1>Buttons</h1>
     <div class="content">
-        <div><Button>Default</Button></div>
-        <div><Button color="green">Green</Button></div>
-        <div><Button color="yellow">Yellow</Button></div>
-        <div><Button color="red">Red</Button></div>
-        <div><Button color="blue">Blue</Button></div>
-        <div><Button color="gray">Gray</Button></div>
+        <div><Button>Default</Button><Button disabled>Default (disabled)</Button></div>
+        <div><Button color="green">Green</Button><Button color="green" disabled>Green (disabled)</Button></div>
+        <div><Button color="yellow">Yellow</Button><Button color="yellow" disabled>Yellow (disabled)</Button></div>
+        <div><Button color="red">Red</Button><Button color="red" disabled>Red (disabled)</Button></div>
+        <div><Button color="blue">Blue</Button><Button color="blue" disabled>Blue (disabled)</Button></div>
+        <div><Button color="gray">Gray</Button><Button color="gray" disabled>Gray (disabled)</Button></div>
     </div>
 </div>
 
@@ -32,27 +32,15 @@
 <div class="card">
     <h1>Mailbox Links</h1>
     <div class="content">
-        <div>
-            <MailboxLink
-                address="some-address"
-                domain="some-domain.com"
-                mails={100}
-            />
-        </div>
-        <div>
-            <MailboxLink
-                address="some-other-address"
-                domain="some-other-domain.com"
-                mails={200}
-            />
-        </div>
+        <div><MailboxLink address="some-address" domain="some-domain.com" mails={100}></MailboxLink></div>
+        <div><MailboxLink address="some-other-address" domain="some-other-domain.com" mails={200}></MailboxLink></div>
     </div>
 </div>
 
 <div class="card">
     <h1>Mailbox Creation Modal</h1>
     <div class="content">
-        <div><MailboxCreationModal /></div>
+        <div><MailboxCreationModal></MailboxCreationModal></div>
     </div>
 </div>
 

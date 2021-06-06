@@ -12,20 +12,17 @@
     function checkAvailability() {
         let cur = available;
         available = null;
-        setTimeout(() => (available = !cur), 3000);
+        setTimeout(() => (available = !cur), 500);
     }
 </script>
 
 <div class="container">
     <h1>Create mailbox</h1>
     <div class="form">
-        <input
-            bind:value={address}
-            class="address"
-            type="text"
-            placeholder="address"
-        />
-        <span class="discriminator">@</span>
+        <input bind:value={address} class="address" type="text" placeholder="address" />
+        <div class="discriminator">
+            @
+        </div>
         <div class="domain">
             <select bind:value={domain}>
                 {#each domains as availableDomain}
@@ -35,9 +32,7 @@
         </div>
     </div>
     <div class="availability">
-        <Button color="blue" on:click={checkAvailability}
-            >Check availability</Button
-        >
+        <Button color="blue" on:click={checkAvailability}>Check availability</Button>
         <div class="label">
             {#if available === null}
                 <Label color="blue">Checking...</Label>
@@ -49,7 +44,7 @@
         </div>
     </div>
     <div class="creation">
-        <Button>Create mailbox</Button>
+        <Button disabled={!available}>Create mailbox</Button>
     </div>
 </div>
 
@@ -68,7 +63,7 @@
                 }
             }
             & .discriminator {
-                @apply text-2xl font-bold text-gray-600 mx-2;
+                @apply text-2xl font-bold text-gray-600 mx-2 inline-block;
             }
             & .domain {
                 @apply inline-block;

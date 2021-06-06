@@ -2,7 +2,9 @@
     export let color: string = "green";
 </script>
 
-<span class={`label ${color}`}><slot /></span>
+<span class={`label ${color}`}>
+    <slot></slot>
+</span>
 
 <style lang="scss">
     .label {
