@@ -50,7 +50,7 @@
 
 <style lang="scss">
     .container {
-        @apply w-full flex flex-row rounded-lg transition duration-200 shadow-lg hover:shadow-xl ring-gray-100 ring-2;
+        @apply w-full flex flex-row rounded-lg transition duration-200 hover:shadow-lg ring-gray-100 ring-2;
         & .details {
             @apply mx-10 my-10 md:my-5 flex flex-col md:flex-row;
             & > * {
