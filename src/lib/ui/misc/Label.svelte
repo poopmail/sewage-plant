@@ -2,10 +2,6 @@
     export let color: string = "green";
 </script>
 
-<span class={`label ${color}`}>
-    <slot></slot>
-</span>
-
 <style lang="scss">
     .label {
         @apply px-5 py-2 rounded-full font-bold uppercase;
@@ -26,3 +22,7 @@
         }
     }
 </style>
+
+<span class={`label ${color}`}>
+    <slot></slot>
+</span>

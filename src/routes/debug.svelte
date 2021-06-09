@@ -1,9 +1,25 @@
+<!-- TODO: Remove this page (or at least hide it behind a simple state boolean variable) -->
 <script lang="ts">
     import MailboxCreationModal from "$lib/ui/dashboard/MailboxCreationModal.svelte";
     import MailboxLink from "$lib/ui/dashboard/MailboxLink.svelte";
     import Button from "$lib/ui/misc/Button.svelte";
     import Label from "$lib/ui/misc/Label.svelte";
 </script>
+
+<style lang="scss">
+    .card {
+        @apply m-14 p-5 rounded-xl ring-gray-100 ring-2;
+        & h1 {
+            @apply mb-5 text-gray-600 text-xl font-semibold uppercase;
+        }
+        & .content {
+            @apply flex flex-col w-max;
+            & > * {
+                @apply mb-5 last:mb-0;
+            }
+        }
+    }
+</style>
 
 <div class="card">
     <h1>Buttons</h1>
@@ -43,18 +59,3 @@
         <div><MailboxCreationModal></MailboxCreationModal></div>
     </div>
 </div>
-
-<style lang="scss">
-    .card {
-        @apply m-14 p-5 rounded-xl ring-gray-100 ring-2;
-        & h1 {
-            @apply mb-5 text-gray-600 text-xl font-semibold uppercase;
-        }
-        & .content {
-            @apply flex flex-col w-max;
-            & > * {
-                @apply mb-5 last:mb-0;
-            }
-        }
-    }
-</style>

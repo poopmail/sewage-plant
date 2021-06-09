@@ -4,6 +4,7 @@
     export let mails: number = 0;
     export let created: Date = new Date();
 
+    // We have to ask the browser for access to the clipboard before copying anything (not sure if this works tho as Chrome never asks me)
     async function askForClipboardPermissions() {
         try {
             const state = await navigator.permissions.query({
@@ -15,40 +16,20 @@
         }
     }
 
+    // Simply copy some text to the clipboard but ask the browser for access first
     async function copy(text: string) {
         await askForClipboardPermissions();
         await navigator.clipboard.writeText(text);
     }
 </script>
 
-<div class="container">
-    <div class="details">
-        <div class="labelled">
-            <div class="label">Address</div>
-            <div class="content address-container" title="Click to copy" on:click={() => copy(`${address}@${domain}`)}>
-                <div class="address">{address}</div>
-                <div class="discriminator">@</div>
-                <div class="domain">{domain}</div>
-            </div>
-        </div>
-        <div class="labelled">
-            <div class="label">Mails</div>
-            <div class="content">{mails}</div>
-        </div>
-        <div class="labelled">
-            <div class="label">Created</div>
-            <div class="content" title={created.toString()}>{`${created.getMonth()}/${created.getDay()}/${created.getFullYear()}`}</div>
-        </div>
-    </div>
-</div>
-
 <style lang="scss">
     .container {
         @apply w-full flex flex-row rounded-lg transition duration-200 hover:shadow-lg ring-gray-100 ring-2;
         & .details {
-            @apply mx-10 my-10 md:my-5 flex flex-col md:flex-row;
+            @apply mx-10 my-10 lg:my-5 flex flex-col lg:flex-row w-full;
             & > * {
-                @apply mt-5 first:mt-0 md:mt-0 md:ml-20 md:first:ml-0;
+                @apply mt-5 first:mt-0 lg:mt-0 lg:ml-20 lg:first:ml-0 w-1/3 first:w-2/3;
             }
             & .labelled {
                 & .label {
@@ -71,3 +52,24 @@
         }
     }
 </style>
+
+<div class="container">
+    <div class="details">
+        <div class="labelled">
+            <div class="label">Address</div>
+            <div class="content address-container" title="Click to copy" on:click={() => copy(`${address}@${domain}`)}>
+                <div class="address">{address}</div>
+                <div class="discriminator">@</div>
+                <div class="domain">{domain}</div>
+            </div>
+        </div>
+        <div class="labelled">
+            <div class="label">Mails</div>
+            <div class="content">{mails}</div>
+        </div>
+        <div class="labelled unimportant">
+            <div class="label">Created</div>
+            <div class="content" title={created.toString()}>{`${created.getMonth()}/${created.getDay()}/${created.getFullYear()}`}</div>
+        </div>
+    </div>
+</div>

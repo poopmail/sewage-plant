@@ -2,51 +2,21 @@
     import Button from "../misc/Button.svelte";
     import Label from "../misc/Label.svelte";
 
-    export let domains: string[] = ["debug1.com", "debug2.com"];
+    // TODO: Dynamically fetch available domains (obviously, the current state is just for debugging purposes)
+    let domains: string[] = ["debug1.com", "debug2.com"];
 
     let address: string = Math.random().toString(16).substr(2, 8);
     let domain: string = "";
 
     let available: boolean = true;
 
+    // TODO: Dynamically check for address availability (obviously, the current state is just for debugging purposes)
     function checkAvailability() {
         let cur = available;
         available = null;
         setTimeout(() => (available = !cur), 500);
     }
 </script>
-
-<div class="container">
-    <h1>Create mailbox</h1>
-    <div class="form">
-        <input bind:value={address} class="address" type="text" placeholder="address" />
-        <div class="discriminator">
-            @
-        </div>
-        <div class="domain">
-            <select bind:value={domain}>
-                {#each domains as availableDomain}
-                    <option value={availableDomain}>{availableDomain}</option>
-                {/each}
-            </select>
-        </div>
-    </div>
-    <div class="availability">
-        <Button color="blue" on:click={checkAvailability}>Check availability</Button>
-        <div class="label">
-            {#if available === null}
-                <Label color="blue">Checking...</Label>
-            {:else if available}
-                <Label color="green">Available</Label>
-            {:else}
-                <Label color="red">Unavailable</Label>
-            {/if}
-        </div>
-    </div>
-    <div class="creation">
-        <Button disabled={!available}>Create mailbox</Button>
-    </div>
-</div>
 
 <style lang="scss">
     .container {
@@ -90,3 +60,35 @@
         }
     }
 </style>
+
+<div class="container">
+    <h1>Create mailbox</h1>
+    <div class="form">
+        <input bind:value={address} class="address" type="text" placeholder="address" />
+        <div class="discriminator">
+            @
+        </div>
+        <div class="domain">
+            <select bind:value={domain}>
+                {#each domains as availableDomain}
+                    <option value={availableDomain}>{availableDomain}</option>
+                {/each}
+            </select>
+        </div>
+    </div>
+    <div class="availability">
+        <Button color="blue" on:click={checkAvailability}>Check availability</Button>
+        <div class="label">
+            {#if available === null}
+                <Label color="blue">Checking...</Label>
+            {:else if available}
+                <Label color="green">Available</Label>
+            {:else}
+                <Label color="red">Unavailable</Label>
+            {/if}
+        </div>
+    </div>
+    <div class="creation">
+        <Button disabled={!available}>Create mailbox</Button>
+    </div>
+</div>
