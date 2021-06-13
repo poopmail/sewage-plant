@@ -57,7 +57,7 @@
     <div class="details">
         <div class="labelled">
             <div class="label">Address</div>
-            <div class="content address-container" title="Click to copy" on:click={() => copy(`${address}@${domain}`)}>
+            <div on:click={() => copy(`${address}@${domain}`)} class="content address-container" title="Click to copy">
                 <div class="address">{address}</div>
                 <div class="discriminator">@</div>
                 <div class="domain">{domain}</div>
@@ -69,7 +69,7 @@
         </div>
         <div class="labelled unimportant">
             <div class="label">Created</div>
-            <div class="content" title={created.toString()}>{`${created.getMonth()}/${created.getDay()}/${created.getFullYear()}`}</div>
+            <div title={created.toString()} class="content">{`${created.getMonth()}/${created.getDay()}/${created.getFullYear()}`}</div>
         </div>
     </div>
 </div>

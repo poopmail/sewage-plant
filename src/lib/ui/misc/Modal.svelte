@@ -23,7 +23,7 @@
     .wrapper {
         @apply fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-80 backdrop-filter backdrop-blur-sm;
         & .container {
-            @apply p-10 rounded-lg bg-white ring-gray-100 ring-2;
+            @apply p-10 rounded-lg bg-white;
             height: fit-content;
             & h1 {
                 @apply text-xl font-bold text-gray-600;
@@ -39,11 +39,11 @@
 </style>
 
 {#if shown} 
-    <div class="wrapper" transition:fade={{duration: 150}}>
+    <div transition:fade={{duration: 150}} class="wrapper">
         <div class="container">
             <h1>{title}</h1>
             {#if closeable}
-                <div class="close-icon" on:click={() => dispatch("close")}>
+                <div on:click={() => dispatch("close")} class="close-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <rect x="4" y="4" width="16" height="16" rx="2" />

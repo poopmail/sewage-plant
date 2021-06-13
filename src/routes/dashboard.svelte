@@ -134,9 +134,9 @@
         <div class="header">
             <h1>Mailboxes</h1>
             <div class="buttons">
-                <div><Button fullWidth disabled={mailboxes === null} on:click={refreshMailboxes}>Refresh</Button></div>
+                <div><Button disabled={mailboxes === null} on:click={refreshMailboxes} fullWidth>Refresh</Button></div>
                 <div>
-                    <Button color="blue" fullWidth on:click={openCreationModal}>Create new</Button>
+                    <Button on:click={openCreationModal} color="blue" fullWidth>Create new</Button>
                     <MailboxCreationModal shown={openedCreationModal} on:close={closeCreationModal}></MailboxCreationModal>
                 </div>
             </div>
