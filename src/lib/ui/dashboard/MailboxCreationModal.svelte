@@ -1,6 +1,9 @@
 <script lang="ts">
     import Button from "../misc/Button.svelte";
     import Label from "../misc/Label.svelte";
+    import Modal from "../misc/Modal.svelte";
+
+    export let shown: boolean = false;
 
     // TODO: Dynamically fetch available domains (obviously, the current state is just for debugging purposes)
     let domains: string[] = ["debug1.com", "debug2.com"];
@@ -19,50 +22,43 @@
 </script>
 
 <style lang="scss">
-    .container {
-        @apply w-full p-10 rounded-lg ring-gray-100 ring-2;
-        & h1 {
-            @apply text-xl font-bold text-gray-600;
+    .form {
+        @apply mt-5;
+        & .address {
+            @apply outline-none px-5 py-3 bg-gray-200 rounded-xl transition duration-200;
+            &:focus {
+                @apply shadow-md;
+            }
         }
-        & .form {
-            @apply mt-5;
-            & .address {
-                @apply outline-none px-5 py-3 bg-gray-200 rounded-xl transition duration-200;
+        & .discriminator {
+            @apply text-2xl font-bold text-gray-600 mx-2 inline-block;
+        }
+        & .domain {
+            @apply inline-block;
+            & select {
+                @apply outline-none px-5 pr-12 py-3 bg-gray-200 rounded-xl appearance-none cursor-pointer transition duration-200;
                 &:focus {
                     @apply shadow-md;
                 }
             }
-            & .discriminator {
-                @apply text-2xl font-bold text-gray-600 mx-2 inline-block;
-            }
-            & .domain {
-                @apply inline-block;
-                & select {
-                    @apply outline-none px-5 pr-12 py-3 bg-gray-200 rounded-xl appearance-none cursor-pointer transition duration-200;
-                    &:focus {
-                        @apply shadow-md;
-                    }
-                }
-                &::after {
-                    @apply -ml-7 mr-3.5 cursor-pointer inline-block pointer-events-none;
-                    content: "\25bc";
-                }
+            &::after {
+                @apply -ml-7 mr-3.5 cursor-pointer inline-block pointer-events-none;
+                content: "\25bc";
             }
         }
-        & .availability {
-            @apply mt-5;
-            & .label {
-                @apply inline-block ml-5;
-            }
+    }
+    .availability {
+        @apply mt-5;
+        & .label {
+            @apply inline-block ml-5;
         }
-        & .creation {
-            @apply mt-10;
-        }
+    }
+    .creation {
+        @apply mt-10;
     }
 </style>
 
-<div class="container">
-    <h1>Create mailbox</h1>
+<Modal shown={shown} on:close title="Create mailbox">
     <div class="form">
         <input bind:value={address} class="address" type="text" placeholder="address" />
         <div class="discriminator">
@@ -91,4 +87,4 @@
     <div class="creation">
         <Button disabled={!available}>Create mailbox</Button>
     </div>
-</div>
+</Modal>

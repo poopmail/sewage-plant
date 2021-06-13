@@ -4,6 +4,12 @@
     import MailboxLink from "$lib/ui/dashboard/MailboxLink.svelte";
     import Button from "$lib/ui/misc/Button.svelte";
     import Label from "$lib/ui/misc/Label.svelte";
+    import Modal from "$lib/ui/misc/Modal.svelte";
+
+    let modalStates: boolean[] = [
+        false,
+        false
+    ];
 </script>
 
 <style lang="scss">
@@ -54,8 +60,15 @@
 </div>
 
 <div class="card">
-    <h1>Mailbox Creation Modal</h1>
+    <h1>Modals</h1>
     <div class="content">
-        <div><MailboxCreationModal></MailboxCreationModal></div>
+        <div>
+            <Button on:click={() => modalStates[0] = true}>Show bare modal</Button>
+            <Modal shown={modalStates[0]} on:close={() => modalStates[0] = false} title="Bare modal">Hello, world!</Modal>
+        </div>
+        <div>
+            <Button on:click={() => modalStates[1] = true}>Show mailbox creation modal</Button>
+            <MailboxCreationModal shown={modalStates[1]} on:close={() => modalStates[1] = false}></MailboxCreationModal>
+        </div>
     </div>
 </div>

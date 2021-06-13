@@ -2,7 +2,7 @@ module.exports = {
     mode: 'jit',
     variants: {
         extend: {
-            margin: ['first'],
+            margin: ['first', 'last'],
             borderRadius: ['last'],
         }
     }
