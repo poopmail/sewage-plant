@@ -2,8 +2,8 @@
     import AccountInfoCard from "$lib/ui/dashboard/AccountInfoCard.svelte";
     import MailboxCreationModal from "$lib/ui/dashboard/MailboxCreationModal.svelte";
     import MailboxLink from "$lib/ui/dashboard/MailboxLink.svelte";
+    import PasswordChangeModal from "$lib/ui/dashboard/PasswordChangeModal.svelte";
     import Button from "$lib/ui/misc/Button.svelte";
-    import Modal from "$lib/ui/misc/Modal.svelte";
 
     /**
      * ##############################
@@ -83,6 +83,10 @@
     }
     function closePasswordChangeModal() {
         openedPasswordChangeModal = false;
+    }
+    function changePassword(newPassword: string) {
+        closePasswordChangeModal();
+        alert(`New password: ${newPassword}`);
     }
 </script>
 
@@ -175,7 +179,7 @@
         </div>
         <div class="item">
             <AccountInfoCard on:changePasswordClick={openPasswordChangeModal} username="Krokas der Allmächtige"></AccountInfoCard>
-            <Modal shown={openedPasswordChangeModal} on:close={closePasswordChangeModal} title="TODO">TODO</Modal>
+            <PasswordChangeModal shown={openedPasswordChangeModal} on:close={closePasswordChangeModal} on:submit={(event) => changePassword(event.detail)}></PasswordChangeModal>
         </div>
     </div>
 </div>
