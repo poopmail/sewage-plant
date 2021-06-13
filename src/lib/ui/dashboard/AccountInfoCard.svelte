@@ -1,9 +1,13 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
+
     import Button from "../misc/Button.svelte";
     import Label from "../misc/Label.svelte";
 
     export let username: string = "";
     export let isAdmin: boolean = false;
+
+    let dispatch = createEventDispatcher();
 </script>
 
 <style lang="scss">
@@ -42,7 +46,7 @@
     <div class="labelled">
         <div class="label">Actions</div>
         <div class="content">
-            <div><Button color="yellow" fullWidth>Change password</Button></div>
+            <div><Button on:click={() => dispatch("changePasswordClick")} color="yellow" fullWidth>Change password</Button></div>
         </div>
     </div>
 </div>

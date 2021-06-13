@@ -1,8 +1,15 @@
 <script lang="ts">
     import AccountInfoCard from "$lib/ui/dashboard/AccountInfoCard.svelte";
+    import MailboxCreationModal from "$lib/ui/dashboard/MailboxCreationModal.svelte";
     import MailboxLink from "$lib/ui/dashboard/MailboxLink.svelte";
     import Button from "$lib/ui/misc/Button.svelte";
+    import Modal from "$lib/ui/misc/Modal.svelte";
 
+    /**
+     * ##############################
+     * ##### MAILBOX LOADING ########
+     * ##############################
+     */
     // TODO: Dynamically fetch mailboxes (obviously, the current state is just for debugging purposes)
     let fullMailboxes: any[] = [
         {
@@ -37,10 +44,45 @@
         },
     ];
     let mailboxes = fullMailboxes;
-    function refresh() {
+    function refreshMailboxes() {
         let newMailboxes = !mailboxes || mailboxes.length === 0 ? fullMailboxes : [];
         mailboxes = null;
         setTimeout(() => mailboxes = newMailboxes, 500);
+    }
+
+    /**
+     * ##############################
+     * ##### MAILBOX CREATION #######
+     * ##############################
+     */
+    let openedCreationModal: boolean = false;
+    function openCreationModal() {
+        openedCreationModal = true;
+    }
+    function closeCreationModal() {
+        openedCreationModal = false;
+    }
+
+    /**
+     * ##############################
+     * ##### ACCOUNT LOGOUT #########
+     * ##############################
+     */
+    function logout() {
+        // TODO: Implement logout
+    }
+
+    /**
+     * ##############################
+     * ##### PASSWORD CHANGE ########
+     * ##############################
+     */
+    let openedPasswordChangeModal: boolean = false;
+    function openPasswordChangeModal() {
+        openedPasswordChangeModal = true;
+    }
+    function closePasswordChangeModal() {
+        openedPasswordChangeModal = false;
     }
 </script>
 
@@ -92,8 +134,11 @@
         <div class="header">
             <h1>Mailboxes</h1>
             <div class="buttons">
-                <div><Button fullWidth disabled={mailboxes === null} on:click={refresh}>Refresh</Button></div>
-                <div><Button color="blue" fullWidth>Create new</Button></div>
+                <div><Button fullWidth disabled={mailboxes === null} on:click={refreshMailboxes}>Refresh</Button></div>
+                <div>
+                    <Button color="blue" fullWidth on:click={openCreationModal}>Create new</Button>
+                    <MailboxCreationModal shown={openedCreationModal} on:close={closeCreationModal}></MailboxCreationModal>
+                </div>
             </div>
         </div>
         {#if mailboxes === null}
@@ -125,11 +170,12 @@
         <div class="header">
             <h1>Account</h1>
             <div class="buttons">
-                <div><Button color="red">Log out</Button></div>
+                <div><Button on:click={logout} color="red">Log out</Button></div>
             </div>
         </div>
         <div class="item">
-            <AccountInfoCard isAdmin username="Krokas der Allmächtige"></AccountInfoCard>
+            <AccountInfoCard on:changePasswordClick={openPasswordChangeModal} username="Krokas der Allmächtige"></AccountInfoCard>
+            <Modal shown={openedPasswordChangeModal} on:close={closePasswordChangeModal} title="TODO">TODO</Modal>
         </div>
     </div>
 </div>

@@ -85,6 +85,6 @@
         </div>
     </div>
     <div class="creation">
-        <Button disabled={!available}>Create mailbox</Button>
+        <Button fullWidth disabled={!available}>Create mailbox</Button>
     </div>
 </Modal>
