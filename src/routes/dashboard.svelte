@@ -62,6 +62,10 @@
     function closeCreationModal() {
         openedCreationModal = false;
     }
+    function createNewMailbox(address: string, domain: string) {
+        closeCreationModal();
+        alert(`New mailbox: ${address}@${domain}`);
+    }
 
     /**
      * ##############################
@@ -141,7 +145,11 @@
                 <div><Button disabled={mailboxes === null} on:click={refreshMailboxes} fullWidth>Refresh</Button></div>
                 <div>
                     <Button on:click={openCreationModal} color="blue" fullWidth>Create new</Button>
-                    <MailboxCreationModal shown={openedCreationModal} on:close={closeCreationModal}></MailboxCreationModal>
+                    <MailboxCreationModal
+                        shown={openedCreationModal}
+                        on:close={closeCreationModal}
+                        on:submit={(event) => createNewMailbox(event.detail.address, event.detail.domain)}
+                    />
                 </div>
             </div>
         </div>
@@ -157,12 +165,14 @@
         {:else}
             {#each mailboxes as mailbox}
                 <div class="item">
-                    <a href={`/mailbox/${mailbox.address}@${mailbox.domain}`}><MailboxLink
-                        address={mailbox.address}
-                        domain={mailbox.domain}
-                        mails={mailbox.mails}
-                        created={mailbox.created}
-                    /></a>
+                    <a href={`/mailbox/${mailbox.address}@${mailbox.domain}`}>
+                        <MailboxLink
+                            address={mailbox.address}
+                            domain={mailbox.domain}
+                            mails={mailbox.mails}
+                            created={mailbox.created}
+                        />
+                    </a>
                 </div>
             {/each}
             <div class="item">
@@ -179,7 +189,11 @@
         </div>
         <div class="item">
             <AccountInfoCard on:changePasswordClick={openPasswordChangeModal} username="Krokas der Allmächtige"></AccountInfoCard>
-            <PasswordChangeModal shown={openedPasswordChangeModal} on:close={closePasswordChangeModal} on:submit={(event) => changePassword(event.detail)}></PasswordChangeModal>
+            <PasswordChangeModal
+                shown={openedPasswordChangeModal}
+                on:close={closePasswordChangeModal}
+                on:submit={(event) => changePassword(event.detail)}
+            />
         </div>
     </div>
 </div>

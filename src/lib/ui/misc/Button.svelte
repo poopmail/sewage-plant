@@ -29,6 +29,15 @@
         &.fullWidth {
             @apply w-full;
         }
+
+        // Hacky way around the ugly blue box on mobile browsers
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 </style>
 

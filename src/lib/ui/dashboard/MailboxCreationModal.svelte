@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
+
     import Button from "../misc/Button.svelte";
     import TextInput from "../misc/TextInput.svelte";
     import Label from "../misc/Label.svelte";
@@ -11,15 +13,26 @@
     let domains: string[] = ["debug1.com", "debug2.com"];
 
     let address: string = Math.random().toString(16).substr(2, 8);
-    let domain: string = "";
+    let domain: string = domains[0];
 
     let available: boolean = true;
+
+    let dispatch = createEventDispatcher();
 
     // TODO: Dynamically check for address availability (obviously, the current state is just for debugging purposes)
     function checkAvailability() {
         let cur = available;
         available = null;
         setTimeout(() => (available = !cur), 500);
+    }
+
+    function submit() {
+        dispatch("submit", {
+            address,
+            domain
+        });
+        address = Math.random().toString(16).substr(2, 8);
+        domain = domains[0];
     }
 </script>
 
@@ -71,6 +84,6 @@
         </div>
     </div>
     <div class="creation">
-        <Button disabled={!available} fullWidth>Create mailbox</Button>
+        <Button disabled={!available} on:click={submit} fullWidth>Create mailbox</Button>
     </div>
 </Modal>
