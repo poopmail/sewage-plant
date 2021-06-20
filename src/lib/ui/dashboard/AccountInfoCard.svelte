@@ -23,6 +23,9 @@
                 &.hasLabel {
                     @apply text-base pt-2;
                 }
+                & div {
+                    @apply mb-3 last:mb-0;
+                }
             }
         }
     }
@@ -47,6 +50,7 @@
         <div class="label">Actions</div>
         <div class="content">
             <div><Button on:click={() => dispatch("changePasswordClick")} color="yellow" fullWidth>Change password</Button></div>
+            <div><Button on:click={() => dispatch("deleteAccountClick")} color="red" fullWidth>Delete account</Button></div>
         </div>
     </div>
 </div>

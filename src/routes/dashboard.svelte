@@ -92,6 +92,15 @@
         closePasswordChangeModal();
         alert(`New password: ${newPassword}`);
     }
+
+    /**
+     * ##############################
+     * ##### ACCOUNT DELETION #######
+     * ##############################
+     */
+    function deleteAccount() {
+        alert("Account deletion");
+    }
 </script>
 
 <style lang="scss">
@@ -188,7 +197,11 @@
             </div>
         </div>
         <div class="item">
-            <AccountInfoCard on:changePasswordClick={openPasswordChangeModal} username="Krokas der Allmächtige"></AccountInfoCard>
+            <AccountInfoCard
+                on:changePasswordClick={openPasswordChangeModal}
+                on:deleteAccountClick={deleteAccount}
+                username="Krokas der Allmächtige"
+            />
             <PasswordChangeModal
                 shown={openedPasswordChangeModal}
                 on:close={closePasswordChangeModal}
